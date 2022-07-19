@@ -30,11 +30,12 @@ public class Test1 {
             Object abilityData = document.get("abilityData");
             if (abilityData != null) {
                 Document abilityDataS = (Document) abilityData;
-                Object o = abilityDataS.get("WS29");
+                Object o = abilityDataS.get("WC18");
                 BigDecimal origina = BigDecimal.valueOf((Double) o).setScale(4, RoundingMode.HALF_DOWN);
                 original.add(origina);
             }
         }
+
 
         // 降序
         original.sort((o1, o2) -> {
@@ -46,83 +47,85 @@ public class Test1 {
                 return 0;
             }
         });
-
-
-        // 同级每个数字出现
-        Map<BigDecimal, Integer> map = new LinkedMap<>(200);
         for (BigDecimal decimal : original) {
-
-            if (map.get(decimal) != null) {
-                Integer sum = map.get(decimal);
-                map.put(decimal, sum + 1);
-            } else {
-                map.put(decimal, 1);
-            }
+            System.out.println(decimal.toString());
         }
+//
+//        // 同级每个数字出现
+//        Map<BigDecimal, Integer> map = new LinkedMap<>(200);
+//        for (BigDecimal decimal : original) {
+//            System.out.println(original);
+//            if (map.get(decimal) != null) {
+//                Integer sum = map.get(decimal);
+//                map.put(decimal, sum + 1);
+//            } else {
+//                map.put(decimal, 1);
+//            }
+//        }
+//
+//        LinkedMap<BigDecimal, PercentStandardScore> scoreLinkedMap = new LinkedMap<>(200);
+//
+//        // 初始百分比
+//
+//        BigDecimal desPercent = BigDecimal.ZERO;
+//
+//        // 降序处理
+//        for (Map.Entry<BigDecimal, Integer> decimalIntegerEntry : map.entrySet()) {
+//
+//            BigDecimal score = decimalIntegerEntry.getKey();
+//
+//            BigDecimal sum = BigDecimal.valueOf(decimalIntegerEntry.getValue());
+//
+//            BigDecimal divide = sum.divide(BigDecimal.valueOf(original.size()), 5,  RoundingMode.HALF_UP);
+//
+//            desPercent = desPercent.add(divide);
+//
+//            PercentStandardScore percentStandardScore = new PercentStandardScore();
+//            percentStandardScore.setScore(score);
+//            percentStandardScore.setDesPercent(desPercent);
+//            scoreLinkedMap.put(score, percentStandardScore);
+//        }
+//
+//        // 升序处理
+//        original.sort(BigDecimal::compareTo);
+//        // 同级每个数字出现
+//        Map<BigDecimal, Integer> aseMap = new LinkedMap<>(200);
+//        for (BigDecimal decimal : original) {
+//
+//            if (aseMap.get(decimal) != null) {
+//                Integer sum = aseMap.get(decimal);
+//                aseMap.put(decimal, sum + 1);
+//            } else {
+//                aseMap.put(decimal, 1);
+//            }
+//        }
+//
+//        BigDecimal asePercent = BigDecimal.ZERO;
+//        for (Map.Entry<BigDecimal, Integer> decimalIntegerEntry : aseMap.entrySet()) {
+//            PercentStandardScore percentStandardScore1 = scoreLinkedMap.get(decimalIntegerEntry.getKey());
+//            BigDecimal sum = BigDecimal.valueOf(decimalIntegerEntry.getValue());
+//            BigDecimal divide = sum.divide(BigDecimal.valueOf(original.size()), 5,  RoundingMode.HALF_UP);
+//            asePercent = asePercent.add(divide);
+//            percentStandardScore1.setAsePercent(asePercent);
+//        }
 
-        LinkedMap<BigDecimal, PercentStandardScore> scoreLinkedMap = new LinkedMap<>(200);
-
-        // 初始百分比
-
-        BigDecimal desPercent = BigDecimal.ZERO;
-
-        // 降序处理
-        for (Map.Entry<BigDecimal, Integer> decimalIntegerEntry : map.entrySet()) {
-
-            BigDecimal score = decimalIntegerEntry.getKey();
-
-            BigDecimal sum = BigDecimal.valueOf(decimalIntegerEntry.getValue());
-
-            BigDecimal divide = sum.divide(BigDecimal.valueOf(original.size()), 5,  RoundingMode.HALF_UP);
-
-            desPercent = desPercent.add(divide);
-
-            PercentStandardScore percentStandardScore = new PercentStandardScore();
-            percentStandardScore.setScore(score);
-            percentStandardScore.setDesPercent(desPercent);
-            scoreLinkedMap.put(score, percentStandardScore);
-        }
-
-        // 升序处理
-        original.sort(BigDecimal::compareTo);
-        // 同级每个数字出现
-        Map<BigDecimal, Integer> aseMap = new LinkedMap<>(200);
-        for (BigDecimal decimal : original) {
-
-            if (aseMap.get(decimal) != null) {
-                Integer sum = aseMap.get(decimal);
-                aseMap.put(decimal, sum + 1);
-            } else {
-                aseMap.put(decimal, 1);
-            }
-        }
-
-        BigDecimal asePercent = BigDecimal.ZERO;
-        for (Map.Entry<BigDecimal, Integer> decimalIntegerEntry : aseMap.entrySet()) {
-            PercentStandardScore percentStandardScore1 = scoreLinkedMap.get(decimalIntegerEntry.getKey());
-            BigDecimal sum = BigDecimal.valueOf(decimalIntegerEntry.getValue());
-            BigDecimal divide = sum.divide(BigDecimal.valueOf(original.size()), 5,  RoundingMode.HALF_UP);
-            asePercent = asePercent.add(divide);
-            percentStandardScore1.setAsePercent(asePercent);
-        }
 
 
-
-        ArrayList<Object[]> list = new ArrayList<>();
-
-        for (Map.Entry<BigDecimal, PercentStandardScore> percentStandardScoreEntry : scoreLinkedMap.entrySet()) {
-            PercentStandardScore value = percentStandardScoreEntry.getValue();
-            Object[] o = new Object[4];
-            o[0] = "";
-            o[1] = value.getScore();
-            o[2] = value.getDesPercent();
-            o[3] = value.getAsePercent();
-            list.add(o);
-        }
-
-        File file = new File("D:\\WS29.xls");
-        ExportExcel exportExcel = new ExportExcel("明细", new String[]{"序号", "原始分数", "百分比降序", "百分比升序" }, list);
-        exportExcel.export(file);
+//        ArrayList<Object[]> list = new ArrayList<>();
+//
+//        for (Map.Entry<BigDecimal, PercentStandardScore> percentStandardScoreEntry : scoreLinkedMap.entrySet()) {
+//            PercentStandardScore value = percentStandardScoreEntry.getValue();
+//            Object[] o = new Object[5];
+//            o[0] = "";
+//            o[1] = value.getScore();
+//            o[2] = value.getDesPercent();
+//            o[3] = value.getAsePercent();
+//            list.add(o);
+//        }
+//
+//        File file = new File("D:\\WS29.xls");
+//        ExportExcel exportExcel = new ExportExcel("明细", new String[]{"序号", "原始分数", "百分比降序", "百分比升序", "全部原始分数" }, list);
+//        exportExcel.export(file);
     }
 
 }
