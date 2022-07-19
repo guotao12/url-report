@@ -1,0 +1,24 @@
+[group_db1]
+url = jdbc:mysql://39.100.70.51:3306/d_sg
+username = root
+password = jidanbushiyuande
+
+[group_db2]
+url = jdbc:mysql://47.92.80.139/d_sg?useSSL=false
+username = admin
+password = Xinzhaor1107!123
+
+[group_db3]
+url = jdbc:mysql://47.92.80.139/d_enterprise?useSSL=false
+username = admin
+password = Xinzhaor1107!123
+
+[d_enterprise]
+url = jdbc:mysql://localhost/d_enterprise?useSSL=false&serverTimezone=UTC
+username = root
+password = 123123
+
+[d_zxbc]
+url = jdbc:mysql://localhost/d_zxbc?useSSL=false&serverTimezone=UTC
+username = root
+password = 123123
